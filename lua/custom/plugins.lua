@@ -32,6 +32,7 @@ local plugins = {
         "eslint_d",
         --- PYTHON
         "pyright",
+        "black",
         "ruff",
         "mypy",
       }
