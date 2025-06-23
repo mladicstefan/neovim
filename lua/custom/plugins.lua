@@ -7,6 +7,13 @@ local plugins = {
     end
   },
   {
+    "nvimtools/none-ls.nvim",
+    event = "VeryLazy",
+    opts = function ()
+      return require "custom.configs.null-ls-py"
+    end
+  },
+  {
     "neovim/nvim-lspconfig",
     config=function()
       require "plugins.configs.lspconfig"
@@ -17,8 +24,16 @@ local plugins = {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
+        --- C++
         "clangd",
         "clang-format",
+        --- TS STACK
+        "typescript-language-server",
+        "eslint_d",
+        --- PYTHON
+        "pyright",
+        "ruff",
+        "mypy",
       }
     }
   }
