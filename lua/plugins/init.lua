@@ -1,5 +1,6 @@
 -- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
 -- List of all default plugins & their definitions
+vim.g.python3_host_prog = "/home/djamla/anaconda3/bin/python"
 local default_plugins = {
 
   "nvim-lua/plenary.nvim",
