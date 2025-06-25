@@ -12,7 +12,9 @@ M.init = function ()
 end
 
 M.mappings = require("custom.configs.mappings")
+
 M.plugins = "custom.plugins"
+
 M.options = {
   user = function()
     vim.g.python3_host_prog = "/home/djamla/anaconda3/bin/python"
@@ -20,4 +22,5 @@ M.options = {
   end,
 }
 
+M.autocmds = require('custom.autocmds')
 return M
