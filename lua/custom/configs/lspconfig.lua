@@ -2,8 +2,7 @@ local base = require('plugins.configs.lspconfig')
 local on_attach = base.on_attach
 local capabilities = base.capabilities
 
-local lspconfig = require('lspconfig')
-local util = require('lspconfig.util')
+local lspconfig = require("lspconfig")
 lspconfig.clangd.setup {
   on_attach = function(client, bufnr)
     client.server.capabilities.signatureHelpProvider = false
@@ -12,6 +11,7 @@ lspconfig.clangd.setup {
   capabilities = capabilities,
 }
 
+local util = require("lspconfig.util")
 lspconfig.pyright.setup({
   on_attach = on_attach,
   capabilities = capabilities,

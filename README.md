@@ -1,3 +1,4 @@
 ## PERSONAL NEOVIM CONFIG
-Using LazyVim
-
+Using NvChad
+No Arrow Keys
+Matching Obsidian Setup
