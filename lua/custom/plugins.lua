@@ -7,18 +7,16 @@ local plugins = {
     end
   },
   {
-    'nvimtools/none-ls.nvim',
-    event = 'VeryLazy',
-    opts = function ()
-      return require 'custom.configs.null-ls-py'
-    end
-  },
-  {
     'neovim/nvim-lspconfig',
     config=function()
       require 'plugins.configs.lspconfig'
       require 'custom.configs.lspconfig'
     end,
+  },
+  {
+  'linux-cultist/venv-selector.nvim',
+  opts = {},
+  event = 'VeryLazy',
   },
   {
     'williamboman/mason.nvim',

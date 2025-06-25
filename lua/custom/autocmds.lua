@@ -1,4 +1,4 @@
-local autocmd = vim.api.nvim_create_autocmd
+local autocmd = vim.api.nvim_create_autocm
 
 autocmd("BufDelete", {
   callback = function()
