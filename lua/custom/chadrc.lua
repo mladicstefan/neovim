@@ -4,7 +4,7 @@
 local M = {}
 
 M.ui = {
-  theme = 'catppuccin',
+  theme = 'ayu_dark',
 }
 
 M.init = function ()
