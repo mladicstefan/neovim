@@ -20,7 +20,7 @@ for _, lsp in ipairs(ts_servers) do
     capabilities = capabilities,
   }
   if lsp == "tsserver" then
-    opts.root_dir = util.root_pattern("package.json", "tsconfig.json", ".git")
+    opts.root_dir = util.root_pattern("package.json", "tsconfig.json", ".git","main.tsx")
   end
   lspconfig[lsp].setup(opts)
 end

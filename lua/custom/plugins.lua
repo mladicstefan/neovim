@@ -14,27 +14,15 @@ local plugins = {
     end,
   },
   {
-
-      'linux-cultist/venv-selector.nvim',
-
-      dependencies = {
-      "neovim/nvim-lspconfig",
-      "mfussenegger/nvim-dap", "mfussenegger/nvim-dap-python", --optional
-      { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = {"nvim-lua/plenary.nvim" } },
-    },
-    ---@type venv-selector.Config
+    'mason-org/mason.nvim',
     opts = {
-        branch = "regexp",
-        stay_on_this_version = true,
+      ui = {
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗",
+        }
       },
-    event = 'VeryLazy',
-    keys = {
-        { ',v', '<cmd>VenvSelect<cr>' },
-      },
-  },
-  {
-    'williamboman/mason.nvim',
-    opts = {
       ensure_installed = {
 
         --- c++
@@ -65,6 +53,8 @@ local plugins = {
         "tsx",
         "python",
         "cpp",
+        "html",
+        "css",
       }
     return opts
     end
