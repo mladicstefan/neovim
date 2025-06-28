@@ -18,9 +18,9 @@ local plugins = {
     opts = {
       ui = {
         icons = {
-          package_installed = "✓",
-          package_pending = "➜",
-          package_uninstalled = "✗",
+          package_installed = '✓',
+          package_pending = '➜',
+          package_uninstalled = '✗',
         }
       },
       ensure_installed = {
@@ -44,28 +44,29 @@ local plugins = {
     }
   },
   {
-    "nvim-treesitter/nvim-treesitter",
+    'nvim-treesitter/nvim-treesitter',
     opts = function()
-      opts = require"plugins.configs.treesitter"
+      opts = require'plugins.configs.treesitter'
       opts.ensure_installed = {
-        "typescript",
-        "javascript",
-        "tsx",
-        "python",
-        "cpp",
-        "html",
-        "css",
+        'typescript',
+        'javascript',
+        'tsx',
+        'python',
+        'cpp',
+        'html',
+        'css',
+        'lua',
       }
     return opts
     end
   },
   {
-    "windwp/nvim-ts-autotag",
+    'windwp/nvim-ts-autotag',
     ft = {
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
+      'javascript',
+      'javascriptreact',
+      'typescript',
+      'typescriptreact',
     },
     config = function ()
     end
