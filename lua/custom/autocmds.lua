@@ -3,11 +3,11 @@ local fn = vim.fn
 ---@diagnostic disable-next-line:unused-local
 local bufcheck = vim.api.nvim_create_augroup('bufcheck', { clear = true })
 
-autocmd("BufDelete", {
+autocmd('BufDelete', {
   callback = function()
     local bufs = vim.t.bufs
     if #bufs == 1 and vim.api.nvim_buf_get_name(bufs[1]) == "" then
-      vim.cmd "Nvdash"
+      vim.cmd ("Nvdash")
     end
   end,
 })

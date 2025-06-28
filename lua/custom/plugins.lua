@@ -6,7 +6,7 @@ local plugins = {
       return require 'custom.configs.null-ls'
     end
   },
-{
+  {
     'neovim/nvim-lspconfig',
     config=function()
       require 'plugins.configs.lspconfig'
@@ -36,12 +36,17 @@ local plugins = {
     'williamboman/mason.nvim',
     opts = {
       ensure_installed = {
+
         --- c++
         'clangd',
         'clang-format',
+
         --- ts stack
         'typescript-language-server',
-        'eslint_d',
+        'tailwindcss-language-server',
+        'eslint-lsp',
+        'prettierd',
+
         --- python
         'pyright',
         'black',
@@ -49,6 +54,31 @@ local plugins = {
         'mypy',
       }
     }
-  }
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function()
+      opts = require"plugins.configs.treesitter"
+      opts.ensure_installed = {
+        "typescript",
+        "javascript",
+        "tsx",
+        "python",
+        "cpp",
+      }
+    return opts
+    end
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    ft = {
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+    },
+    config = function ()
+    end
+  },
 }
 return plugins
