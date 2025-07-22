@@ -4,7 +4,7 @@ local lspconfig = require "lspconfig"
 
 local nvlsp = require "nvchad.configs.lspconfig"
 
-local servers = { "rust", "cssls" }
+local servers = { "cssls", "eslint", "ts_ls", "tailwindcss" }
 vim.lsp.enable(servers)
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -14,4 +14,3 @@ for _, lsp in ipairs(servers) do
     capabilities = nvlsp.capabilities,
   }
 end
--- read :h vim.lsp.config for changing options of lsp servers 
