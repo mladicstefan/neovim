@@ -2,10 +2,10 @@
 local M = {}
 
 M.base46 = {
-	theme = "ayu_dark",
+	theme = "mountain",
 
 }
-
+vim.opt.shell = "/usr/bin/zsh"
 M.nvdash = { load_on_startup = true }
 M.ui = {
       tabufline = {

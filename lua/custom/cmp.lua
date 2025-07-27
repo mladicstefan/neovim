@@ -81,6 +81,6 @@ return {
   -- NvChad usually has a snippet solution, so this might be redundant
   -- if NvChad's cmp_config already sets up luasnip.
   -- For now, we list them as dependencies for nvim-cmp.
-  -- { "L3MON4D3/LuaSnip", dependencies = { "rafamadriz/friendly-snippets" }, build = "make install_jsregexp" },
-  -- { "saadparwaiz1/cmp_luasnip" },
+  { "L3MON4D3/LuaSnip", dependencies = { "rafamadriz/friendly-snippets" }, build = "make install_jsregexp" },
+  { "saadparwaiz1/cmp_luasnip" },
 }
