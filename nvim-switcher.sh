@@ -15,7 +15,13 @@ if [ "$1" = "nightly" ]; then
         mv *.lua nvim-stable/ 2>/dev/null
         mv lua nvim-stable/ 2>/dev/null
         [ -f "lazy-lock.json" ] && mv lazy-lock.json nvim-stable/
-        echo "Moved stable config to nvim-stable/"
+        # Restore nightly config if it exists
+        if [ -d "nvim-nightly" ]; then
+            cp -r nvim-nightly/* ./ 2>/dev/null
+            echo "Restored nightly config"
+        else
+            echo "No nvim-nightly found - starting fresh"
+        fi
         echo "Switched to nightly config"
     else
         echo "Error: No lua directory found. Are you on the wrong config?"
@@ -31,8 +37,7 @@ elif [ "$1" = "stable" ]; then
         [ -f "lazy-lock.json" ] && mv lazy-lock.json nvim-nightly/
         # Now restore stable config
         if [ -d "nvim-stable" ]; then
-            mv nvim-stable/* ./ 2>/dev/null
-            rmdir nvim-stable
+            cp -r nvim-stable/* ./ 2>/dev/null
             echo "Restored stable config"
         else
             echo "Warning: No nvim-stable directory found"
