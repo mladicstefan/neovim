@@ -1,3 +1,7 @@
+vim.schedule(function()
+	vim.o.clipboard = 'unnamedplus'
+end)
+
 --highlight yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = vim.api.nvim_create_augroup("highlight_yank", {}),
@@ -7,3 +11,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank { higroup = "IncSearch", timeout = 500 }
   end,
 })
+
+

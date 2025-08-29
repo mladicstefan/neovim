@@ -47,6 +47,3 @@ vim.o.fileencoding = "utf-8"
 
 -- Command line
 vim.o.inccommand = "split" -- Live preview of substitute commands
-
--- Clipboard
-vim.o.clipboard = "unnamedplus" -- Use system clipboard
