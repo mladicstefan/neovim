@@ -7,6 +7,8 @@ vim.o.termguicolors = true
 vim.o.wrap = false
 vim.o.tabstop = 4
 
+vim.g.mapleader = " "
+
 -- Indentation
 vim.o.autoindent = true
 vim.o.breakindent = true -- Wrapped lines maintain indentation

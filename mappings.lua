@@ -1,5 +1,8 @@
 local map = vim.keymap.set
 
+
+map("n", "<>)
+
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")

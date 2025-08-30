@@ -1,5 +1,5 @@
 vim.schedule(function()
-	vim.o.clipboard = 'unnamedplus'
+    vim.o.clipboard = 'unnamedplus'
 end)
 
 --highlight yank
