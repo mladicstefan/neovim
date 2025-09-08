@@ -43,7 +43,7 @@ map('n', '<leader>s', ':source ~/.config/nvim/init.lua<CR>', { desc = "Reload nv
 
 -- Telescope mappings (file navigation)
 map('n', '<leader>ff', function() require('telescope.builtin').find_files() end, { desc = "Find files" })
-map('n', '<leader>fg', function() require('telescope.builtin').live_grep() end, { desc = "Live grep search" })
+map('n', '<leader>fz', function() require('telescope.builtin').live_grep() end, { desc = "Live grep search" })
 map('n', '<leader>fb', function() require('telescope.builtin').buffers() end, { desc = "Find buffers" })
 
 map('n', '<leader>e', vim.diagnostic.open_float, { desc = "Show line diagnostics" })
