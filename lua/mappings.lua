@@ -45,3 +45,8 @@ map('n', '<leader>s', ':source ~/.config/nvim/init.lua<CR>', { desc = "Reload nv
 map('n', '<leader>ff', function() require('telescope.builtin').find_files() end, { desc = "Find files" })
 map('n', '<leader>fg', function() require('telescope.builtin').live_grep() end, { desc = "Live grep search" })
 map('n', '<leader>fb', function() require('telescope.builtin').buffers() end, { desc = "Find buffers" })
+
+map('n', '<leader>e', vim.diagnostic.open_float, { desc = "Show line diagnostics" })
+map('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+map('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+map('n', '<leader>dl', vim.diagnostic.setloclist, { desc = "Open diagnostic list" })
