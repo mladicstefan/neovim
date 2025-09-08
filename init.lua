@@ -1,77 +1,48 @@
-require('options')
-require('autocmds')
-require('mappings')
--- Package management
+-- vim.pack.add (requires Neovim 0.12+)
 vim.pack.add({
-    'https://github.com/williamboman/mason.nvim',
-    'https://github.com/williamboman/mason-lspconfig.nvim',
-    'https://github.com/neovim/nvim-lspconfig',
-    'https://github.com/nvim-treesitter/nvim-treesitter',
-    'https://github.com/nvim-telescope/telescope.nvim',
-    'https://github.com/nvim-lua/plenary.nvim',
-    'https://github.com/Saghen/blink.cmp',
+  { src = 'https://github.com/nvim-lua/plenary.nvim' },
+  { src = 'https://github.com/nvim-telescope/telescope.nvim' },
+  { src = 'https://github.com/neovim/nvim-lspconfig' },
+  { src = 'https://github.com/hrsh7th/nvim-cmp' },
+  { src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },
 })
-
--- Mason setup
-require('mason').setup({})
-require('mason-lspconfig').setup({
-    ensure_installed = {
-        'clangd',
-        'rust_analyzer',
-        'lua_ls', -- Fixed: was 'luaau_lsp'
-    },
-    automatic_installation = true
+require('options')
+require('mappings')
+require('autocmds')
+local lspconfig = require('lspconfig')
+local cmp_nvim_lsp = require('cmp_nvim_lsp')
+local capabilities = cmp_nvim_lsp.default_capabilities()
+lspconfig.clangd.setup({
+  capabilities = capabilities,
+  cmd = { 'clangd' },
+  filetypes = { 'c', 'cpp' },
 })
-
--- TreeSitter setup
-require('nvim-treesitter.configs').setup({
-    ensure_installed = { 'c', 'cpp', 'rust', 'lua', 'vim', 'vimdoc' },
-    sync_install = false,
-    auto_install = true,
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-    },
-    indent = { enable = true },
+local cmp = require('cmp')
+cmp.setup({
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+  })
 })
-
-require('blink.cmp').setup({
-  keymap = { 
-    preset = 'none',  -- Disable presets, use custom keymaps
-    ['<C-Tab>'] = { 'accept', 'fallback' },  -- Leader+Tab to accept completion
-    ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },  -- Force show menu or toggle docs
-    ['<C-e>'] = { 'hide' },  -- Hide completion menu
-    ['<C-n>'] = { 'select_next', 'fallback' },  -- Next completion item
-    ['<C-p>'] = { 'select_prev', 'fallback' },  -- Previous completion item
-    ['<C-k>'] = { 'show_documentation', 'hide_documentation' },  -- Toggle signature help
-  },
-  appearance = {
-    use_nvim_cmp_as_default = true,
-    nerd_font_variant = 'mono'
-  },
-  fuzzy = {
-    implementation = "prefer_rust",
-  },
-  sources = {
-    default = { 'lsp', 'path', 'snippets', 'buffer' },
-  },
-  completion = {
-    accept = {
-      auto_brackets = { enabled = true },
-    },
-    menu = {
-      draw = {
-        treesitter = { "lsp" },
-      },
-    },
-    documentation = {
-      auto_show = true,
-      auto_show_delay_ms = 200,
-    },
-    trigger = {
-      signature_help = { enabled = true },
-    },
-  },
+local telescope = require('telescope')
+telescope.setup({
+  defaults = {
+    file_ignore_patterns = { "%.o", "%.so", "%.a" },
+  }
 })
-
-
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+  end,
+})
