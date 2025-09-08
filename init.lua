@@ -1,15 +1,15 @@
 -- vim.pack.add (requires Neovim 0.12+)
 vim.pack.add({
-  { src = 'https://github.com/nvim-lua/plenary.nvim' },
-  { src = 'https://github.com/nvim-telescope/telescope.nvim' },
-  { src = 'https://github.com/neovim/nvim-lspconfig' },
-  { src = 'https://github.com/hrsh7th/nvim-cmp' },
-  { src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
+ { src = 'https://github.com/nvim-lua/plenary.nvim' },
+ { src = 'https://github.com/nvim-telescope/telescope.nvim' },
+ { src = 'https://github.com/neovim/nvim-lspconfig' },
+ { src = 'https://github.com/hrsh7th/nvim-cmp' },
+ { src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },
+ { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
+ { src = 'https://github.com/windwp/nvim-autopairs' },
 })
 
 vim.cmd.colorscheme('habamax')
-
 require('options')
 require('mappings')
 require('autocmds')
@@ -17,24 +17,34 @@ require('autocmds')
 local lspconfig = require('lspconfig')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 local capabilities = cmp_nvim_lsp.default_capabilities()
+
 lspconfig.clangd.setup({
-  capabilities = capabilities,
-  cmd = { 'clangd' },
-  filetypes = { 'c', 'cpp' },
+ capabilities = capabilities,
+ cmd = { 
+   'clangd',
+   '--background-index',
+   '--clang-tidy=false',
+   '--completion-style=bundled',
+   '--header-insertion=never',
+ },
+ filetypes = { 'c', 'cpp' },
 })
 
 require('nvim-treesitter.configs').setup({
-  ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc", "query" },
-  sync_install = false,
-  auto_install = true,
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-  indent = {
-    enable = true
-  },
+ ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc", "query" },
+ sync_install = false,
+ auto_install = true,
+ highlight = {
+   enable = true,
+   additional_vim_regex_highlighting = false,
+ },
+ indent = {
+   enable = true
+ },
 })
+
+local autopairs = require('nvim-autopairs')
+autopairs.setup({})
 
 local cmp = require('cmp')
 cmp.setup({
@@ -64,20 +74,27 @@ cmp.setup({
   })
 })
 
+-- Integrate autopairs with cmp
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+
 local telescope = require('telescope')
 telescope.setup({
-  defaults = {
-    file_ignore_patterns = { "%.o", "%.so", "%.a" },
-  }
+ defaults = {
+   file_ignore_patterns = { "%.o", "%.so", "%.a" },
+ }
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-  callback = function(ev)
-    local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-  end,
+ group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+ callback = function(ev)
+   local opts = { buffer = ev.buf }
+   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+   vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+   vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+   vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+   vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+ end,
 })
