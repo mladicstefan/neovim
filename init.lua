@@ -8,6 +8,8 @@ vim.pack.add({
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
 })
 
+vim.cmd.colorscheme('habamax')
+
 require('options')
 require('mappings')
 require('autocmds')
