@@ -3,20 +3,19 @@ vim.pack.add({
  { src = 'https://github.com/nvim-lua/plenary.nvim' },
  { src = 'https://github.com/nvim-telescope/telescope.nvim' },
  { src = 'https://github.com/neovim/nvim-lspconfig' },
- { src = 'https://github.com/hrsh7th/nvim-cmp' },
- { src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },
+ { src = 'https://github.com/saghen/blink.cmp' },
  { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
  { src = 'https://github.com/windwp/nvim-autopairs' },
 })
 
 vim.cmd.colorscheme('habamax')
+
 require('options')
 require('mappings')
 require('autocmds')
 
 local lspconfig = require('lspconfig')
-local cmp_nvim_lsp = require('cmp_nvim_lsp')
-local capabilities = cmp_nvim_lsp.default_capabilities()
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 lspconfig.clangd.setup({
  capabilities = capabilities,
@@ -75,38 +74,19 @@ require('nvim-treesitter.configs').setup({
 
 local autopairs = require('nvim-autopairs')
 autopairs.setup({})
-
-local cmp = require('cmp')
-cmp.setup({
-  mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()  -- Insert normal tab character
-      end
-    end, { "i", "s" }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_previous_item()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-  }),
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-  })
+require('blink.cmp').setup({
+  keymap = { 
+    preset = 'enter',
+    ['<Tab>'] = { 'select_next', 'fallback' },
+    ['<S-Tab>'] = { 'select_prev', 'fallback' },
+  },
+  appearance = {
+    use_nvim_cmp_as_default = true,
+  },
+  sources = {
+    default = { 'lsp', 'path', 'snippets', 'buffer' },
+  },
 })
-
--- Integrate autopairs with cmp
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
 local telescope = require('telescope')
 telescope.setup({
