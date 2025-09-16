@@ -30,8 +30,20 @@ lspconfig.clangd.setup({
  filetypes = { 'c', 'cpp' },
 })
 
+lspconfig.rust_analyzer.setup({
+    capabilities=capabilities,
+    cmd = { vim.fn.expand("~/.cargo/bin/rust-analyzer") },
+    settings = {
+        ['/home/djamla/.cargo/bin/rust-analyzer'] = {
+            checkOnSave = {
+                command = "cargo check"
+            },
+        }
+    },
+})
+
 require('nvim-treesitter.configs').setup({
- ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc", "query" },
+ ensure_installed = { "c", "cpp","rust", "lua", "vim", "vimdoc", "query" },
  sync_install = false,
  auto_install = true,
  highlight = {
