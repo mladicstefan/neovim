@@ -63,6 +63,12 @@ lspconfig.basedpyright.setup({
   },
 })
 
+-- Bash
+lspconfig.bashls.setup({
+  capabilities = capabilities,
+  filetypes = { 'sh', 'bash' },
+})
+
 -- Golang
 lspconfig.gopls.setup({
   capabilities = capabilities,
