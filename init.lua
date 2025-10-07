@@ -17,7 +17,7 @@ require('lsp')
 require('nvim-treesitter.configs').setup({
  ensure_installed = {
   "c", "cpp", "rust", "python", "go", "lua", "vim", "vimdoc", "query",
-  "svelte", "javascript", "typescript", "html", "css"
+  "svelte", "javascript", "typescript", "html", "css","zig"
  },
  modules = {},
  ignore_install = {},

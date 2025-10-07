@@ -128,6 +128,11 @@ lspconfig.tailwindcss.setup({
   filetypes = { 'html', 'css', 'svelte', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
 })
 
+--Zig
+lspconfig.zls.setup({
+  capabilities = capabilities,
+})
+
 -- LSP keybinds
 vim.api.nvim_create_autocmd('LspAttach', {
  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
