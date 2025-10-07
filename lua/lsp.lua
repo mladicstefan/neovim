@@ -51,7 +51,7 @@ lspconfig.basedpyright.setup({
   capabilities = capabilities,
   settings = {
     python = {
-      pythonPath = ".venv/bin/python",
+        pythonPath = vim.fn.exepath('python'),
     },
     basedpyright = {
       analysis = {
@@ -107,6 +107,25 @@ lspconfig.gopls.setup({
       semanticTokens = true,
     },
   },
+})
+
+-- Svelte
+lspconfig.svelte.setup({
+  capabilities = capabilities,
+  filetypes = { 'svelte' },
+})
+
+-- Typescript
+lspconfig.ts_ls.setup({
+  capabilities = capabilities,
+})lspconfig.ts_ls.setup({
+  capabilities = capabilities,
+})
+
+-- Tailwind CSS
+lspconfig.tailwindcss.setup({
+  capabilities = capabilities,
+  filetypes = { 'html', 'css', 'svelte', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
 })
 
 -- LSP keybinds
