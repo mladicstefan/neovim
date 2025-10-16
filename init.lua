@@ -6,6 +6,7 @@ vim.pack.add({
  { src = 'https://github.com/saghen/blink.cmp' },
  { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
  { src = 'https://github.com/windwp/nvim-autopairs' },
+ { src = 'https://github.com/chomosuke/typst-preview.nvim' },
 })
 
 vim.cmd.colorscheme('habamax')
@@ -17,7 +18,7 @@ require('lsp')
 require('nvim-treesitter.configs').setup({
  ensure_installed = {
   "c", "cpp", "rust", "python", "go", "lua", "vim", "vimdoc", "query",
-  "svelte", "javascript", "typescript", "html", "css","zig"
+  "svelte", "javascript", "typescript", "html", "css","zig","typst"
  },
  modules = {},
  ignore_install = {},
@@ -55,3 +56,6 @@ telescope.setup({
    file_ignore_patterns = { "%.o", "%.so", "%.a" },
  }
 })
+
+
+require('typst-preview').setup({})
