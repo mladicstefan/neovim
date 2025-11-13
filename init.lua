@@ -9,7 +9,10 @@ vim.pack.add({
  { src = 'https://github.com/chomosuke/typst-preview.nvim' },
 })
 
-vim.cmd.colorscheme('habamax')
+-- vim.cmd.colorscheme('habamax')
+--ubuntu colors
+vim.cmd.colorscheme('ubuntu')
+
 require('options')
 require('mappings')
 require('autocmds')
@@ -37,7 +40,7 @@ local autopairs = require('nvim-autopairs')
 autopairs.setup({})
 
 require('blink.cmp').setup({
-  keymap = { 
+  keymap = {
     preset = 'enter',
     ['<Tab>'] = { 'select_next', 'fallback' },
     ['<S-Tab>'] = { 'select_prev', 'fallback' },
