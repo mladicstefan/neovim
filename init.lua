@@ -7,6 +7,7 @@ vim.pack.add({
  { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
  { src = 'https://github.com/windwp/nvim-autopairs' },
  { src = 'https://github.com/chomosuke/typst-preview.nvim' },
+ { src = 'https://github.com/stevearc/conform.nvim' },
 })
 
 -- vim.cmd.colorscheme('habamax')
@@ -60,5 +61,29 @@ telescope.setup({
  }
 })
 
-
 require('typst-preview').setup({})
+
+--formatting
+require('conform').setup({
+  formatters_by_ft = {
+    c = { 'clang_format' },
+    cpp = { 'clang_format' },
+    rust = { 'rustfmt' },
+    python = { 'isort', 'black' },
+    go = { 'goimports', 'gofmt' },
+    lua = { 'stylua' },
+    javascript = { 'prettier' },
+    typescript = { 'prettier' },
+    svelte = { 'prettier' },
+    html = { 'prettier' },
+    css = { 'prettier' },
+    bash = { 'shfmt' },
+    sh = { 'shfmt' },
+    zig = { 'zigfmt' },
+  },
+  -- Format on save
+  format_on_save = {
+    timeout_ms = 500,
+    lsp_format = 'fallback',
+  },
+})

@@ -145,6 +145,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
    vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+   -- Add manual format keymap (optional, since you have format_on_save)
+   vim.keymap.set({'n', 'v'}, '<leader>fm', function()
+     require('conform').format({ bufnr = ev.buf, lsp_format = 'fallback' })
+   end, opts)
  end,
 })
 
