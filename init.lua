@@ -8,10 +8,14 @@ vim.pack.add({
 	{ src = "https://github.com/windwp/nvim-autopairs" },
 	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
+	{ src = "https://github.com/uhs-robert/oasis.nvim" },
 })
--- vim.cmd.colorscheme('habamax')
+
+vim.o.background = "dark"
+vim.cmd.colorscheme("oasis-abyss")
+
 --ubuntu colors
-vim.cmd.colorscheme("ubuntu")
+--vim.cmd.colorscheme("ubuntu")
 require("options")
 require("mappings")
 require("autocmds")
@@ -90,7 +94,11 @@ require("conform").setup({
 		zig = { "zigfmt" },
 		ocaml = { "ocamlformat" },
 	},
-	-- Format on save
+	formatters = {
+		clang_format = {
+			prepend_args = { "--style={IndentWidth: 4, BreakBeforeBraces: Allman}" },
+		},
+	}, -- Format on save
 	format_on_save = {
 		timeout_ms = 500,
 		lsp_format = "fallback",
