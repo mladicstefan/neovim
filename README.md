@@ -7,7 +7,7 @@
 ## Installation
 ```bash
 git clone  https://github.com/mladicstefan/neovim ~/.config/nvim
-nvim  # Auto-installs everything via Mason
+nvim
 ```
 
 ## Supported Languages
