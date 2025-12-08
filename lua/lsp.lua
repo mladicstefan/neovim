@@ -1,7 +1,7 @@
-local lspconfig = require("lspconfig")
 local capabilities = require("blink.cmp").get_lsp_capabilities()
+
 -- C/C++
-lspconfig.clangd.setup({
+vim.lsp.config.clangd = {
 	capabilities = capabilities,
 	cmd = {
 		"clangd",
@@ -11,19 +11,28 @@ lspconfig.clangd.setup({
 		"--header-insertion=never",
 	},
 	filetypes = { "c", "cpp" },
-})
+	root_markers = { ".git", "compile_commands.json" },
+}
+
 -- Rust
-lspconfig.rust_analyzer.setup({
+vim.lsp.config.rust_analyzer = {
 	capabilities = capabilities,
+	cmd = { "rust-analyzer" },
+	filetypes = { "rust" },
+	root_markers = { "Cargo.toml" },
 	settings = {
 		["rust-analyzer"] = {
 			checkOnSave = true,
 		},
 	},
-})
+}
+
 -- Lua
-lspconfig.lua_ls.setup({
+vim.lsp.config.lua_ls = {
 	capabilities = capabilities,
+	cmd = { "lua-language-server" },
+	filetypes = { "lua" },
+	root_markers = { ".git", ".luarc.json" },
 	settings = {
 		Lua = {
 			runtime = {
@@ -41,10 +50,14 @@ lspconfig.lua_ls.setup({
 			},
 		},
 	},
-})
+}
+
 -- Python
-lspconfig.basedpyright.setup({
+vim.lsp.config.basedpyright = {
 	capabilities = capabilities,
+	cmd = { "basedpyright-langserver", "--stdio" },
+	filetypes = { "python" },
+	root_markers = { "pyproject.toml", "setup.py", ".git" },
 	settings = {
 		python = {
 			pythonPath = vim.fn.exepath("python"),
@@ -57,15 +70,22 @@ lspconfig.basedpyright.setup({
 			},
 		},
 	},
-})
+}
+
 -- Bash
-lspconfig.bashls.setup({
+vim.lsp.config.bashls = {
 	capabilities = capabilities,
+	cmd = { "bash-language-server", "start" },
 	filetypes = { "sh", "bash" },
-})
+	root_markers = { ".git" },
+}
+
 -- Golang
-lspconfig.gopls.setup({
+vim.lsp.config.gopls = {
 	capabilities = capabilities,
+	cmd = { "gopls" },
+	filetypes = { "go", "gomod", "gowork", "gotmpl" },
+	root_markers = { "go.mod", ".git" },
 	settings = {
 		gopls = {
 			gofumpt = true,
@@ -101,30 +121,76 @@ lspconfig.gopls.setup({
 			semanticTokens = true,
 		},
 	},
-})
+}
+
 -- Svelte
-lspconfig.svelte.setup({
+vim.lsp.config.svelte = {
 	capabilities = capabilities,
+	cmd = { "svelteserver", "--stdio" },
 	filetypes = { "svelte" },
-})
+	root_markers = { "package.json", ".git" },
+}
+
 -- Typescript
-lspconfig.ts_ls.setup({
+vim.lsp.config.ts_ls = {
 	capabilities = capabilities,
-})
+	cmd = { "typescript-language-server", "--stdio" },
+	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+	root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
+}
+
 -- Tailwind CSS
-lspconfig.tailwindcss.setup({
+vim.lsp.config.tailwindcss = {
 	capabilities = capabilities,
+	cmd = { "tailwindcss-language-server", "--stdio" },
 	filetypes = { "html", "css", "svelte", "javascript", "typescript", "javascriptreact", "typescriptreact" },
-})
---Zig
-lspconfig.zls.setup({
+	root_markers = { "tailwind.config.js", "tailwind.config.ts", ".git" },
+}
+
+-- Zig
+vim.lsp.config.zls = {
 	capabilities = capabilities,
-})
+	cmd = { "zls" },
+	filetypes = { "zig", "zir" },
+	root_markers = { "build.zig", ".git" },
+}
+
 -- OCaml
-lspconfig.ocamllsp.setup({
+vim.lsp.config.ocamllsp = {
 	capabilities = capabilities,
+	cmd = { "ocamllsp" },
 	filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
+	root_markers = { "dune-project", "dune-workspace", ".git" },
+}
+
+-- Typst
+vim.lsp.config.tinymist = {
+	capabilities = capabilities,
+	cmd = { "tinymist" },
+	filetypes = { "typst" },
+	root_markers = { ".git" },
+	settings = {
+		formatterMode = "typstyle",
+		exportPdf = "onSave",
+	},
+}
+
+-- Enable all configured LSP servers
+vim.lsp.enable({
+	"clangd",
+	"rust_analyzer",
+	"lua_ls",
+	"basedpyright",
+	"bashls",
+	"gopls",
+	"svelte",
+	"ts_ls",
+	"tailwindcss",
+	"zls",
+	"ocamllsp",
+	"tinymist",
 })
+
 -- LSP keybinds
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -142,12 +208,4 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			require("conform").format({ bufnr = ev.buf, lsp_format = "fallback" })
 		end, opts)
 	end,
-})
---Typst
-lspconfig.tinymist.setup({
-	capabilities = capabilities,
-	settings = {
-		formatterMode = "typstyle",
-		exportPdf = "onSave",
-	},
 })
