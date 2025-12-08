@@ -9,18 +9,45 @@ vim.pack.add({
 	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/uhs-robert/oasis.nvim" },
-    { src = "https://github.com/williamboman/mason.nvim" },
+	{ src = "https://github.com/williamboman/mason.nvim" },
 	{ src = "https://github.com/williamboman/mason-lspconfig.nvim" },
 })
 
 vim.o.background = "dark"
 vim.cmd.colorscheme("oasis-abyss")
 
---ubuntu colors
---vim.cmd.colorscheme("ubuntu")
+require("mason").setup()
+
+local mason_ensure = require("mason-ensure")
+mason_ensure.ensure_installed()
+
+vim.api.nvim_create_user_command("MasonCheckStatus", function()
+	require("mason-ensure").check_status()
+end, {})
+
+require("mason-lspconfig").setup({
+	ensure_installed = {
+		"lua_ls",
+		"clangd",
+		"rust_analyzer",
+		"basedpyright",
+		"bashls",
+		"gopls",
+		"svelte",
+		"ts_ls",
+		"tailwindcss",
+		"zls",
+		"ocamllsp",
+		"tinymist",
+	},
+	automatic_installation = true,
+})
+
+require("lsp")
 require("options")
 require("mappings")
 require("autocmds")
+
 require("nvim-treesitter.configs").setup({
 	ensure_installed = {
 		"c",
@@ -54,26 +81,7 @@ require("nvim-treesitter.configs").setup({
 		enable = true,
 	},
 })
-require("mason").setup()
-require("mason-lspconfig").setup({
-	ensure_installed = {
-		"lua_ls",
-		"clangd",
-		"rust_analyzer",
-		"basedpyright",
-		"bashls",
-		"gopls",
-		"svelte",
-		"ts_ls",
-		"tailwindcss",
-		"zls",
-		"ocamllsp",
-		"tinymist",
-	},
-	automatic_installation = true,
-})
 
-require("lsp")
 local autopairs = require("nvim-autopairs")
 autopairs.setup({})
 require("blink.cmp").setup({

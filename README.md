@@ -1,41 +1,30 @@
 # Based nvim config
 
-## Dependencies
+## Requirements
+- Neovim 0.12+ (nightly)
+- Git, (and the Languages listed below, for full support)
 
-### LSP Servers
-
-#### Arch:
+## Installation
 ```bash
-sudo pacman -S lua-language-server clangd rust-analyzer go-pls bash-language-server shellcheck zls
-pipx install basedpyright
-npm i -g svelte-language-server @tailwindcss/language-server typescript-language-server
-# typst lsp
-cargo install --git https://github.com/Myriad-Dreamin/tinymist --locked tinymist-cli
+git clone  https://github.com/mladicstefan/neovim ~/.config/nvim
+nvim  # Auto-installs everything via Mason
 ```
 
-#### Debian/Ubuntu:
-**Note**: must use nightly nvim version! Consider bob nvim version manager or build from source
-```bash
-sudo apt update && sudo apt install -y clangd gopls shellcheck cargo npm python3-pip pipx curl git && pipx install basedpyright && npm i -g bash-language-server lua-fmt svelte-language-server @tailwindcss/language-server typescript-language-server && cargo install rust-analyzer --locked || curl -L https://github.com/rust-lang/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c | sudo tee /usr/local/bin/rust-analyzer > /dev/null && sudo chmod +x /usr/local/bin/rust-analyzer && curl -L https://github.com/ziglang/zig/releases/latest/download/zig-linux-x86_64.tar.xz | tar -xJf - && sudo mv zig-linux-x86_64*/zig /usr/local/bin/ && cargo install --git https://github.com/Myriad-Dreamin/tinymist --locked tinymist-cli
-```
+## Supported Languages
 
-### Formatters
+| Language | LSP | Formatter |
+|----------|-----|-----------|
+| Lua | lua_ls | stylua |
+| C/C++ | clangd | clang-format |
+| Rust | rust_analyzer | rustfmt |
+| Python | basedpyright | black, isort |
+| Go | gopls | goimports, gofmt |
+| JavaScript/TypeScript | ts_ls | prettier |
+| Svelte | svelte | prettier |
+| HTML/CSS | - | prettier |
+| Bash | bashls | shfmt |
+| Zig | zls | zigfmt |
+| OCaml | ocamllsp | ocamlformat |
+| Typst | tinymist | - |
 
-#### Arch:
-```bash
-sudo pacman -S clang stylua prettier shfmt
-pipx install black isort
-```
-
-#### Debian/Ubuntu:
-```bash
-sudo apt install -y clang-format
-pipx install black isort stylua
-npm i -g prettier shfmt
-go install golang.org/x/tools/cmd/goimports@latest
-```
-
-**Note**: The following formatters come bundled with their respective toolchains:
-- `rustfmt` (included with `rustup`)
-- `gofmt` and `goimports` (included with Go)
-- `zigfmt` (included with Zig)
+**Note**: Most tools auto-install via Mason. Install Go and Zig system-wide for their formatters.
