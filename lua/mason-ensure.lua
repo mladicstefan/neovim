@@ -10,6 +10,7 @@ M.required_tools = {
 	"prettier",
 	"shfmt",
 	"ocamlformat",
+	"yamlfmt",
 }
 
 function M.ensure_installed()

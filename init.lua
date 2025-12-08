@@ -39,6 +39,7 @@ require("mason-lspconfig").setup({
 		"zls",
 		"ocamllsp",
 		"tinymist",
+		-- "ansible-language-server",
 	},
 	automatic_installation = true,
 })
