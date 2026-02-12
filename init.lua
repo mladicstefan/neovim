@@ -11,12 +11,14 @@ vim.pack.add({
 	{ src = "https://github.com/uhs-robert/oasis.nvim" },
 	{ src = "https://github.com/williamboman/mason.nvim" },
 	{ src = "https://github.com/williamboman/mason-lspconfig.nvim" },
+	{ src = "https://github.com/MrcJkb/haskell-tools.nvim" },
 })
 
 vim.o.background = "dark"
 vim.cmd.colorscheme("oasis-abyss")
 
 require("mason").setup()
+require("haskell")
 
 local mason_ensure = require("mason-ensure")
 mason_ensure.ensure_installed()
@@ -58,6 +60,7 @@ require("nvim-treesitter.configs").setup({
 		"go",
 		"lua",
 		"vim",
+		"haskell",
 		"vimdoc",
 		"query",
 		"svelte",
@@ -123,6 +126,7 @@ require("conform").setup({
 		sh = { "shfmt" },
 		zig = { "zigfmt" },
 		ocaml = { "ocamlformat" },
+		haskell = { "ormolu" },
 	},
 	formatters = {
 		clang_format = {

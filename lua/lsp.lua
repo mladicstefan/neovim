@@ -27,6 +27,19 @@ vim.lsp.config.rust_analyzer = {
 	},
 }
 
+-- --Haskell
+-- vim.lsp.config.hls = {
+-- 	capabilities = capabilities,
+-- 	cmd = { "haskell-language-server-wrapper", "--lsp" },
+-- 	filetypes = { "haskell", "lhaskell" },
+-- 	root_markers = { "hie.yaml", "*.cabal", "cabal.project", "stack.yaml", "package.yaml", ".git" },
+-- 	settings = {
+-- 		haskell = {
+-- 			formattingProvider = "ormolu",
+-- 		},
+-- 	},
+-- }
+
 -- Lua
 vim.lsp.config.lua_ls = {
 	capabilities = capabilities,
