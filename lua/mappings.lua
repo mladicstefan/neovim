@@ -1,5 +1,6 @@
 local map = vim.keymap.set
 
+map("n", "<Space>", "<Nop>")
 -- Clear search highlighting
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlighting" })
 
@@ -35,18 +36,24 @@ map("n", "<leader>h", ":split | term<CR>", { desc = "Open horizontal terminal" }
 map("n", "<leader>v", ":vsplit | term<CR>", { desc = "Open vertical terminal" })
 
 -- File operations
-map('n', '<leader>w', ':write<CR>', { desc = "Save current file" })
-map('n', '<leader>q', ':quit<CR>', { desc = "Quit current window" })
+map("n", "<leader>w", ":write<CR>", { desc = "Save current file" })
+map("n", "<leader>q", ":quit<CR>", { desc = "Quit current window" })
 
 -- Source configuration
-map('n', '<leader>s', ':source ~/.config/nvim/init.lua<CR>', { desc = "Reload nvim configuration" })
+map("n", "<leader>s", ":source ~/.config/nvim/init.lua<CR>", { desc = "Reload nvim configuration" })
 
 -- Telescope mappings (file navigation)
-map('n', '<leader>ff', function() require('telescope.builtin').find_files() end, { desc = "Find files" })
-map('n', '<leader>fz', function() require('telescope.builtin').live_grep() end, { desc = "Live grep search" })
-map('n', '<leader>fb', function() require('telescope.builtin').buffers() end, { desc = "Find buffers" })
+map("n", "<leader>ff", function()
+	require("telescope.builtin").find_files()
+end, { desc = "Find files" })
+map("n", "<leader>fz", function()
+	require("telescope.builtin").live_grep()
+end, { desc = "Live grep search" })
+map("n", "<leader>fb", function()
+	require("telescope.builtin").buffers()
+end, { desc = "Find buffers" })
 
-map('n', '<leader>e', vim.diagnostic.open_float, { desc = "Show line diagnostics" })
-map('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
-map('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
-map('n', '<leader>dl', vim.diagnostic.setloclist, { desc = "Open diagnostic list" })
+map("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
+map("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+map("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+map("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Open diagnostic list" })
