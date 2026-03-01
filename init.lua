@@ -130,8 +130,8 @@ require("conform").setup({
 	formatters_by_ft = {
 		c = { "clang_format" },
 		cpp = { "clang_format" },
+		rpython = { "ruff_fix", "ruff_format" },
 		rust = { "rustfmt" },
-		python = { "isort", "black" },
 		go = { "goimports", "gofmt" },
 		lua = { "stylua" },
 		javascript = { "prettier" },
