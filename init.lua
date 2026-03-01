@@ -12,6 +12,11 @@ vim.pack.add({
 	{ src = "https://github.com/williamboman/mason.nvim" },
 	{ src = "https://github.com/williamboman/mason-lspconfig.nvim" },
 	{ src = "https://github.com/MrcJkb/haskell-tools.nvim" },
+	{ src = "https://github.com/mfussenegger/nvim-dap" },
+	{ src = "https://github.com/rcarriga/nvim-dap-ui" },
+	{ src = "https://github.com/mfussenegger/nvim-dap-python" },
+	{ src = "https://github.com/theHamsta/nvim-dap-virtual-text" },
+	{ src = "https://github.com/nvim-neotest/nvim-nio" },
 })
 
 vim.o.background = "dark"
@@ -46,10 +51,22 @@ require("mason-lspconfig").setup({
 	automatic_installation = true,
 })
 
+local mason_packages = { "debugpy", "codelldb", "black", "isort", "ruff" }
+local registry = require("mason-registry")
+registry.refresh(function()
+	for _, name in ipairs(mason_packages) do
+		local ok, pkg = pcall(registry.get_package, name)
+		if ok and not pkg:is_installed() then
+			pkg:install()
+		end
+	end
+end)
+
 require("lsp")
 require("options")
 require("mappings")
 require("autocmds")
+require("dap-cfg")
 
 require("nvim-treesitter.configs").setup({
 	ensure_installed = {

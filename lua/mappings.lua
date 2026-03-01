@@ -57,3 +57,31 @@ map("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show line diagnostics
 map("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
 map("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 map("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Open diagnostic list" })
+
+-- debugging
+local dap = require("dap")
+local dapui = require("dapui")
+
+-- Session control
+vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "DAP continue/start" })
+vim.keymap.set("n", "<leader>dq", dap.terminate, { desc = "DAP terminate" })
+vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "DAP toggle UI" })
+
+-- Stepping
+vim.keymap.set("n", "<leader>dn", dap.step_over, { desc = "DAP step over" })
+vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "DAP step into" })
+vim.keymap.set("n", "<leader>do", dap.step_out, { desc = "DAP step out" })
+
+-- Breakpoints
+vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "DAP toggle breakpoint" })
+vim.keymap.set("n", "<leader>dB", function()
+	dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+end, { desc = "DAP conditional breakpoint" })
+vim.keymap.set("n", "<leader>dx", dap.clear_breakpoints, { desc = "DAP clear all breakpoints" })
+
+-- Inspection
+vim.keymap.set({ "n", "v" }, "<leader>de", dapui.eval, { desc = "DAP evaluate expression" })
+
+-- Python specific
+vim.keymap.set("n", "<leader>dtm", require("dap-python").test_method, { desc = "DAP test method" })
+vim.keymap.set("n", "<leader>dtc", require("dap-python").test_class, { desc = "DAP test class" })

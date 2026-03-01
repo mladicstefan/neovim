@@ -8,6 +8,10 @@
       "rev": "ffe26e8df8115c9665d24231f8a49fadb2d611ce",
       "src": "https://github.com/stevearc/conform.nvim"
     },
+    "haskell-tools.nvim": {
+      "rev": "754270182bdd3ce62ed86c97bd8c5de359daefde",
+      "src": "https://github.com/MrcJkb/haskell-tools.nvim"
+    },
     "mason-lspconfig.nvim": {
       "rev": "0b9bb925c000ae649ff7e7149c8cd00031f4b539",
       "src": "https://github.com/williamboman/mason-lspconfig.nvim"
@@ -20,9 +24,29 @@
       "rev": "7a2c97cccd60abc559344042fefb1d5a85b3e33b",
       "src": "https://github.com/windwp/nvim-autopairs"
     },
+    "nvim-dap": {
+      "rev": "b516f20b487b0ac6a281e376dfac1d16b5040041",
+      "src": "https://github.com/mfussenegger/nvim-dap"
+    },
+    "nvim-dap-python": {
+      "rev": "1808458eba2b18f178f990e01376941a42c7f93b",
+      "src": "https://github.com/mfussenegger/nvim-dap-python"
+    },
+    "nvim-dap-ui": {
+      "rev": "cf91d5e2d07c72903d052f5207511bf7ecdb7122",
+      "src": "https://github.com/rcarriga/nvim-dap-ui"
+    },
+    "nvim-dap-virtual-text": {
+      "rev": "fbdb48c2ed45f4a8293d0d483f7730d24467ccb6",
+      "src": "https://github.com/theHamsta/nvim-dap-virtual-text"
+    },
     "nvim-lspconfig": {
       "rev": "a2bd1cf7b0446a7414aaf373cea5e4ca804c9c69",
       "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-nio": {
+      "rev": "21f5324bfac14e22ba26553caf69ec76ae8a7662",
+      "src": "https://github.com/nvim-neotest/nvim-nio"
     },
     "nvim-treesitter": {
       "rev": "42fc28ba918343ebfd5565147a42a26580579482",
