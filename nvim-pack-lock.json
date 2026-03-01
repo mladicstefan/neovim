@@ -12,6 +12,10 @@
       "rev": "754270182bdd3ce62ed86c97bd8c5de359daefde",
       "src": "https://github.com/MrcJkb/haskell-tools.nvim"
     },
+    "lean.nvim": {
+      "rev": "539facb84f490a0e859d82cebf5974e80a492edc",
+      "src": "https://github.com/Julian/lean.nvim"
+    },
     "mason-lspconfig.nvim": {
       "rev": "0b9bb925c000ae649ff7e7149c8cd00031f4b539",
       "src": "https://github.com/williamboman/mason-lspconfig.nvim"

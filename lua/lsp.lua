@@ -22,6 +22,10 @@ vim.lsp.config.rust_analyzer = {
 	root_markers = { "Cargo.toml" },
 	settings = {
 		["rust-analyzer"] = {
+			check = {
+				command = "clippy",
+				extraArgs = { "--", "-W", "clippy::pedantic" },
+			},
 			checkOnSave = true,
 		},
 	},
