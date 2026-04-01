@@ -146,6 +146,25 @@ vim.lsp.config.svelte = {
 	cmd = { "svelteserver", "--stdio" },
 	filetypes = { "svelte" },
 	root_markers = { "package.json", ".git" },
+	init_options = {
+		configuration = {
+			svelte = {
+				plugin = {
+					typescript = { enable = true, completions = { enable = true } },
+					html = { completions = { enable = true } },
+					css = { completions = { enable = true } },
+				},
+			},
+		},
+	},
+	on_attach = function(client, _)
+		vim.api.nvim_create_autocmd("BufWritePost", {
+			pattern = { "*.js", "*.ts" },
+			callback = function(ctx)
+				client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
+			end,
+		})
+	end,
 }
 
 -- Typescript

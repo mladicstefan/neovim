@@ -6,6 +6,7 @@ vim.pack.add({
 	{ src = "https://github.com/saghen/blink.cmp" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/windwp/nvim-autopairs" },
+	{ src = "https://github.com/windwp/nvim-ts-autotag" },
 	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/uhs-robert/oasis.nvim" },
@@ -106,6 +107,7 @@ require("nvim-treesitter.configs").setup({
 
 local autopairs = require("nvim-autopairs")
 autopairs.setup({})
+require("nvim-ts-autotag").setup()
 require("blink.cmp").setup({
 	keymap = {
 		preset = "enter",
@@ -122,7 +124,7 @@ require("blink.cmp").setup({
 local telescope = require("telescope")
 telescope.setup({
 	defaults = {
-		file_ignore_patterns = { "%.o", "%.so", "%.a" },
+		file_ignore_patterns = { "%.o", "%.so", "%.a", "node_modules/" },
 	},
 })
 require("typst-preview").setup({})

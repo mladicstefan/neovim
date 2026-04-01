@@ -23,7 +23,7 @@ failed=()
 
 for tool in "${tools[@]}"; do
     echo "━━━ Installing $tool ━━━"
-    local extra_flags=""
+    extra_flags=""
     [[ "$tool" == "cargo-nextest" ]] && extra_flags="--locked"
     if cargo install "$tool" --target-dir "$BUILD_DIR" $extra_flags; then
         echo "✓ $tool installed"
@@ -34,7 +34,6 @@ for tool in "${tools[@]}"; do
     echo ""
 done
 
-# cargo-udeps requires nightly
 echo "━━━ Installing cargo-udeps (nightly) ━━━"
 if cargo +nightly install cargo-udeps --target-dir "$BUILD_DIR"; then
     echo "✓ cargo-udeps installed"
@@ -43,7 +42,6 @@ else
     failed+=("cargo-udeps")
 fi
 
-# miri via rustup
 echo "━━━ Installing miri via rustup ━━━"
 if rustup component add miri; then
     echo "✓ miri installed"
