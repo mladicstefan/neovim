@@ -87,3 +87,24 @@ dap.configurations.rust = {
 		end,
 	},
 }
+--
+-- Zig config — prompts for binary path (zig build output goes to zig-out/bin/)
+dap.configurations.zig = {
+	{
+		name = "Launch (codelldb)",
+		type = "codelldb",
+		request = "launch",
+		program = function()
+			local zig_out = vim.fn.getcwd() .. "/zig-out/bin/"
+			local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+			local bin = zig_out .. project_name
+			if vim.fn.filereadable(bin) == 1 then
+				return bin
+			end
+			return vim.fn.input("Path to executable: ", zig_out, "file")
+		end,
+		cwd = "${workspaceFolder}",
+		stopOnEntry = false,
+		args = {},
+	},
+}
