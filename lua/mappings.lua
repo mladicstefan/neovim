@@ -1,5 +1,10 @@
 local map = vim.keymap.set
 
+map("n", "<C-i>", function()
+	local enabled = vim.lsp.inlay_hint.is_enabled()
+	vim.lsp.inlay_hint.enable(not enabled)
+end, { desc = "Toggle inlay hints" })
+
 map("n", "<Space>", "<Nop>")
 -- Clear search highlighting
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlighting" })

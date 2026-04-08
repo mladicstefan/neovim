@@ -9,6 +9,7 @@ vim.lsp.config.clangd = {
 		"--clang-tidy=false",
 		"--completion-style=bundled",
 		"--header-insertion=never",
+		"--inlay-hints",
 	},
 	filetypes = { "c", "cpp" },
 	root_markers = { ".git", "compile_commands.json" },
@@ -27,6 +28,12 @@ vim.lsp.config.rust_analyzer = {
 				extraArgs = { "--", "-W", "clippy::pedantic" },
 			},
 			checkOnSave = true,
+		},
+		inlayHints = {
+			parameterHints = { enable = true },
+			typeHints = { enable = true },
+			chainingHints = { enable = true },
+			closingBraceHints = { enable = true, minLines = 25 },
 		},
 	},
 }
@@ -65,6 +72,7 @@ vim.lsp.config.lua_ls = {
 			telemetry = {
 				enable = false,
 			},
+			hints = { enable = true },
 		},
 	},
 }
@@ -173,6 +181,29 @@ vim.lsp.config.ts_ls = {
 	cmd = { "typescript-language-server", "--stdio" },
 	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 	root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
+	settings = {
+		typescript = {
+			inlayHints = {
+				includeInlayParameterNameHints = "all",
+				includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+				includeInlayFunctionParameterTypeHints = true,
+				includeInlayVariableTypeHints = true,
+				includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+				includeInlayPropertyDeclarationTypeHints = true,
+				includeInlayFunctionLikeReturnTypeHints = true,
+				includeInlayEnumMemberValueHints = true,
+			},
+		},
+		javascript = {
+			inlayHints = {
+				includeInlayParameterNameHints = "literals",
+				includeInlayFunctionParameterTypeHints = true,
+				includeInlayVariableTypeHints = true,
+				includeInlayFunctionLikeReturnTypeHints = true,
+				includeInlayEnumMemberValueHints = true,
+			},
+		},
+	},
 }
 
 -- Tailwind CSS
@@ -183,12 +214,44 @@ vim.lsp.config.tailwindcss = {
 	root_markers = { "tailwind.config.js", "tailwind.config.ts", ".git" },
 }
 
--- Zig
+--Zig
 vim.lsp.config.zls = {
 	capabilities = capabilities,
 	cmd = { "zls" },
 	filetypes = { "zig", "zir" },
 	root_markers = { "build.zig", ".git" },
+	settings = {
+		zls = {
+			-- Use zig ast-check for better error detection
+			prefer_ast_check_as_child_process = true,
+
+			-- Build on save for real compiler errors (needs a 'check' step
+			-- in your build.zig, or just set to true to use 'install' step)
+			enable_build_on_save = true,
+
+			-- Snippets & completions
+			enable_snippets = true,
+			enable_argument_placeholders = true,
+			completion_label_details = true,
+
+			-- Style warnings (e.g. variable naming conventions)
+			warn_style = true,
+
+			-- Semantic tokens: "partial" is recommended for neovim
+			-- since treesitter already handles basic highlighting
+			semantic_tokens = "partial",
+
+			-- Inlay hints
+			inlay_hints_show_variable_type_hints = true,
+			inlay_hints_show_parameter_name = true,
+			inlay_hints_show_builtin = true,
+			inlay_hints_exclude_single_argument = true,
+			inlay_hints_hide_redundant_param_names = true,
+
+			-- Highlight global var declarations (useful to spot globals)
+			highlight_global_var_declarations = true,
+		},
+	},
 }
 
 -- OCaml

@@ -19,6 +19,7 @@ vim.pack.add({
 	{ src = "https://github.com/theHamsta/nvim-dap-virtual-text" },
 	{ src = "https://github.com/nvim-neotest/nvim-nio" },
 	{ src = "https://github.com/Julian/lean.nvim" },
+	{ src = "https://github.com/chrisgrieser/nvim-lsp-endhints" },
 })
 
 vim.o.background = "dark"
@@ -70,6 +71,17 @@ require("mappings")
 require("autocmds")
 require("dap-cfg")
 
+require("lsp-endhints").setup({
+	autoEnableHints = true,
+	icons = {
+		type = "󰜁 ",
+		parameter = "󰏪 ",
+	},
+	label = {
+		truncateAtChars = 24,
+	},
+})
+
 require("nvim-treesitter.configs").setup({
 	ensure_installed = {
 		"c",
@@ -115,7 +127,16 @@ require("blink.cmp").setup({
 		["<S-Tab>"] = { "select_prev", "fallback" },
 	},
 	appearance = {
-		use_nvim_cmp_as_default = true,
+		use_nvim_cmp_as_default = false,
+	},
+	completion = {
+		documentation = {
+			auto_show = true,
+			auto_show_delay_ms = 100,
+			window = {
+				border = "rounded",
+			},
+		},
 	},
 	sources = {
 		default = { "lsp", "path", "snippets", "buffer" },
