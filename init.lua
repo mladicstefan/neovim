@@ -20,6 +20,9 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-neotest/nvim-nio" },
 	{ src = "https://github.com/Julian/lean.nvim" },
 	{ src = "https://github.com/chrisgrieser/nvim-lsp-endhints" },
+	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+	{ src = "https://github.com/folke/which-key.nvim" },
+	{ src = "https://github.com/folke/trouble.nvim" },
 })
 
 vim.o.background = "dark"
@@ -82,6 +85,12 @@ require("lsp-endhints").setup({
 	},
 })
 
+require("gitsigns").setup()
+
+require("which-key").setup()
+
+require("trouble").setup()
+
 require("nvim-treesitter.configs").setup({
 	ensure_installed = {
 		"c",
@@ -130,6 +139,12 @@ require("blink.cmp").setup({
 		use_nvim_cmp_as_default = false,
 	},
 	completion = {
+		ghost_text = { enabled = true },
+		menu = {
+			draw = {
+				treesitter = { "lsp" },
+			},
+		},
 		documentation = {
 			auto_show = true,
 			auto_show_delay_ms = 100,
@@ -137,7 +152,18 @@ require("blink.cmp").setup({
 				border = "rounded",
 			},
 		},
+		accept = {
+			auto_brackets = { enabled = true },
+		},
 	},
+	signature = {
+		enabled = true,
+		window = {
+			border = "rounded",
+		},
+	},
+	fuzzy = { implementation = "prefer_rust_with_warning" },
+	cmdline = { enabled = true },
 	sources = {
 		default = { "lsp", "path", "snippets", "buffer" },
 	},

@@ -90,3 +90,18 @@ vim.keymap.set({ "n", "v" }, "<leader>de", dapui.eval, { desc = "DAP evaluate ex
 -- Python specific
 vim.keymap.set("n", "<leader>dtm", require("dap-python").test_method, { desc = "DAP test method" })
 vim.keymap.set("n", "<leader>dtc", require("dap-python").test_class, { desc = "DAP test class" })
+
+-- Trouble
+map("n", "<leader>t", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Trouble: project diagnostics" })
+map("n", "<leader>tb", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Trouble: buffer diagnostics" })
+map("n", "<leader>ts", "<cmd>Trouble symbols toggle<cr>", { desc = "Trouble: symbols" })
+
+-- Gitsigns
+local gs = require("gitsigns")
+map("n", "]h", gs.next_hunk, { desc = "Next git hunk" })
+map("n", "[h", gs.prev_hunk, { desc = "Prev git hunk" })
+map("n", "<leader>gs", gs.stage_hunk, { desc = "Git stage hunk" })
+map("n", "<leader>gr", gs.reset_hunk, { desc = "Git reset hunk" })
+map("n", "<leader>gb", gs.blame_line, { desc = "Git blame line" })
+map("n", "<leader>gp", gs.preview_hunk, { desc = "Git preview hunk" })
+map("n", "<leader>gf", gs.diffthis, { desc = "Git diff this file" })
