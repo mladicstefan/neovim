@@ -68,28 +68,28 @@ local dap = require("dap")
 local dapui = require("dapui")
 
 -- Session control
-vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "DAP continue/start" })
-vim.keymap.set("n", "<leader>dq", dap.terminate, { desc = "DAP terminate" })
-vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "DAP toggle UI" })
+map("n", "<leader>dc", dap.continue, { desc = "DAP continue/start" })
+map("n", "<leader>dq", dap.terminate, { desc = "DAP terminate" })
+map("n", "<leader>du", dapui.toggle, { desc = "DAP toggle UI" })
 
 -- Stepping
-vim.keymap.set("n", "<leader>dn", dap.step_over, { desc = "DAP step over" })
-vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "DAP step into" })
-vim.keymap.set("n", "<leader>do", dap.step_out, { desc = "DAP step out" })
+map("n", "<leader>dn", dap.step_over, { desc = "DAP step over" })
+map("n", "<leader>di", dap.step_into, { desc = "DAP step into" })
+map("n", "<leader>do", dap.step_out, { desc = "DAP step out" })
 
 -- Breakpoints
-vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "DAP toggle breakpoint" })
-vim.keymap.set("n", "<leader>dB", function()
+map("n", "<leader>db", dap.toggle_breakpoint, { desc = "DAP toggle breakpoint" })
+map("n", "<leader>dB", function()
 	dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
 end, { desc = "DAP conditional breakpoint" })
-vim.keymap.set("n", "<leader>dx", dap.clear_breakpoints, { desc = "DAP clear all breakpoints" })
+map("n", "<leader>dx", dap.clear_breakpoints, { desc = "DAP clear all breakpoints" })
 
 -- Inspection
-vim.keymap.set({ "n", "v" }, "<leader>de", dapui.eval, { desc = "DAP evaluate expression" })
+map({ "n", "v" }, "<leader>de", dapui.eval, { desc = "DAP evaluate expression" })
 
 -- Python specific
-vim.keymap.set("n", "<leader>dtm", require("dap-python").test_method, { desc = "DAP test method" })
-vim.keymap.set("n", "<leader>dtc", require("dap-python").test_class, { desc = "DAP test class" })
+map("n", "<leader>dtm", require("dap-python").test_method, { desc = "DAP test method" })
+map("n", "<leader>dtc", require("dap-python").test_class, { desc = "DAP test class" })
 
 -- Trouble
 map("n", "<leader>t", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Trouble: project diagnostics" })
