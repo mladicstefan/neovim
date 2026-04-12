@@ -49,7 +49,6 @@ require("mason-lspconfig").setup({
 		"svelte",
 		"ts_ls",
 		"tailwindcss",
-		"zls",
 		"ocamllsp",
 		"tinymist",
 		-- "ansible-language-server",

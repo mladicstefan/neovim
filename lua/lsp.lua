@@ -217,7 +217,7 @@ vim.lsp.config.tailwindcss = {
 --Zig
 vim.lsp.config.zls = {
 	capabilities = capabilities,
-	cmd = { "zls" },
+	cmd = { "zls-master" },
 	filetypes = { "zig", "zir" },
 	root_markers = { "build.zig", ".git" },
 	settings = {
