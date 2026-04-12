@@ -23,8 +23,9 @@ nvim
 | Svelte | svelte | prettier |
 | HTML/CSS | - | prettier |
 | Bash | bashls | shfmt |
-| Zig | zls | zigfmt |
+| Zig | zls | zigfmt |  
 | OCaml | ocamllsp | ocamlformat |
 | Typst | tinymist | - |
 
 **Note**: Most tools auto-install via Mason. Install Go and Zig system-wide for their formatters.
+If you want Zig support, nightly build of both Zig and Zls required
