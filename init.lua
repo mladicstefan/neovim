@@ -4,7 +4,8 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/saghen/blink.cmp" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/neovim-treesitter/treesitter-parser-registry" },
+	{ src = "https://github.com/neovim-treesitter/nvim-treesitter", version = "main" },
 	{ src = "https://github.com/windwp/nvim-autopairs" },
 	{ src = "https://github.com/windwp/nvim-ts-autotag" },
 	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
@@ -90,7 +91,7 @@ require("which-key").setup()
 
 require("trouble").setup()
 
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter").setup({
 	ensure_installed = {
 		"c",
 		"cpp",
