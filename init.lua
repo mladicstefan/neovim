@@ -32,6 +32,16 @@ vim.cmd.colorscheme("oasis-abyss")
 require("mason").setup()
 require("haskell")
 
+vim.diagnostic.config({
+	virtual_text = {
+		severity = { min = vim.diagnostic.severity.WARN },
+		prefix = "●",
+		spacing = 4,
+	},
+	signs = true,
+	underline = true,
+})
+
 local mason_ensure = require("mason-ensure")
 mason_ensure.ensure_installed()
 
