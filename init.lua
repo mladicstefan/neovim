@@ -91,40 +91,75 @@ require("which-key").setup()
 
 require("trouble").setup()
 
-require("nvim-treesitter").setup({
-	ensure_installed = {
-		"c",
-		"cpp",
-		"rust",
-		"python",
-		"go",
-		"lua",
-		"vim",
-		"haskell",
-		"vimdoc",
-		"query",
-		"svelte",
-		"javascript",
-		"typescript",
-		"html",
-		"css",
-		"zig",
-		"typst",
-		"ocaml",
-		"ocaml_interface",
-	},
-	modules = {},
-	ignore_install = {},
-	sync_install = false,
-	auto_install = true,
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = false,
-	},
-	indent = {
-		enable = true,
-	},
-})
+local ts = require("nvim-treesitter")
+
+local ensure_installed = {
+	"c",
+	"cpp",
+	"rust",
+	"python",
+	"go",
+	"lua",
+	"vim",
+	"haskell",
+	"vimdoc",
+	"query",
+	"svelte",
+	"javascript",
+	"typescript",
+	"html",
+	"css",
+	"zig",
+	"typst",
+	"ocaml",
+	"ocaml_interface",
+}
+
+local installed = ts.get_installed()
+local to_install = vim.iter(ensure_installed)
+	:filter(function(lang)
+		return not vim.tbl_contains(installed, lang)
+	end)
+	:totable()
+
+if #to_install > 0 then
+	ts.install(to_install)
+end
+
+-- require("nvim-treesitter").setup({
+-- 	ensure_installed = {
+-- 		"c",
+-- 		"cpp",
+-- 		"rust",
+-- 		"python",
+-- 		"go",
+-- 		"lua",
+-- 		"vim",
+-- 		"haskell",
+-- 		"vimdoc",
+-- 		"query",
+-- 		"svelte",
+-- 		"javascript",
+-- 		"typescript",
+-- 		"html",
+-- 		"css",
+-- 		"zig",
+-- 		"typst",
+-- 		"ocaml",
+-- 		"ocaml_interface",
+-- 	},
+-- 	modules = {},
+-- 	ignore_install = {},
+-- 	sync_install = false,
+-- 	auto_install = true,
+-- 	highlight = {
+-- 		enable = true,
+-- 		additional_vim_regex_highlighting = false,
+-- 	},
+-- 	indent = {
+-- 		enable = true,
+-- 	},
+-- })
 
 local autopairs = require("nvim-autopairs")
 autopairs.setup({})
